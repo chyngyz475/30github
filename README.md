@@ -1,2 +1,2 @@
 # 30github
-Челлендж продлится 30 дней Growthhungry
+Челлендж продлится 30 дней от Growthhungry
