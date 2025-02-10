@@ -1,9 +1,13 @@
-import requests
+import openai
 
-class P2PService:
-    def __init__(self, api_url):
-        self.api_url = api_url
+class AIService:
+    def __init__(self, api_key):
+        openai.api_key = api_key
 
-    def verify_p2p_data(self, card_number):
-        response = requests.get(f'{self.api_url}/verify', params={'card_number': card_number})
-        return response.json() if response.status_code == 200 else None
+    def analyze_content(self, content):
+        response = openai.Completion.create(
+            engine="text-davinci-003",
+            prompt=f"Analyze the following content for payment data: {content}",
+            max_tokens=150
+        )
+        return response.choices[0].text.strip()
