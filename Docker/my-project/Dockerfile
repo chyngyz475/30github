@@ -1,8 +1,17 @@
-FROM python:3.9
+# Используем официальный Node.js образ
+FROM node:18-alpine
 
+# Устанавливаем рабочую директорию внутри контейнера
 WORKDIR /app
 
+# Копируем package.json и package-lock.json для установки зависимостей
+COPY package*.json ./
 
+# Устанавливаем зависимости
+RUN npm install
+
+# Копируем весь проект
 COPY . .
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Запускаем React-приложение
+CMD ["npm", "start"]

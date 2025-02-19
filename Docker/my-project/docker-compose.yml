@@ -1,11 +1,14 @@
-version: '3.10'
+version: '3.8'
 
 services:
-  web:
+  react-app:
     build: .
     ports:
-      - "8000:8000"
-    environment:
-      - DEBUG=True
+      - "3000:3000"
     volumes:
       - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    stdin_open: true
+    tty: true
