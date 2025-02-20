@@ -3,7 +3,7 @@ from aiogram.types import ParseMode
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 import logging
 
-API_TOKEN = 'YOUR_API_TOKEN'
+API_TOKEN = '7415359822:AAF51xrFN4y1owp2OxDmOTKtU0JWMmu4QVI'
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
 dp.middleware.setup(LoggingMiddleware())
