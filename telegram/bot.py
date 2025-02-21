@@ -2,7 +2,7 @@
 
 import logging
 from aiogram import Bot, Dispatcher, types
-from aiogram.utils.middleware import logging
+from aiogram.utils.log import logging
 from aiogram.utils import executor
 from scraper import fetch_data
 from config import TELEGRAM_TOKEN
