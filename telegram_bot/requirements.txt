@@ -1,5 +1,0 @@
-aiogram
-playwright
-aioredis
-aiosqlite
-python-dotenv
