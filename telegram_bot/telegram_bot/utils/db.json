@@ -1,0 +1,30 @@
+{
+    "accounts": [
+        {
+            "username": "user1",
+            "password": "password123",
+            "email": "user1@example.com",
+            "tg_id": "1234567890",
+            "registration_date": "2025-02-22T15:30:00Z"
+        },
+        {
+            "username": "user2",
+            "password": "password456",
+            "email": "user2@example.com",
+            "tg_id": "0987654321",
+            "registration_date": "2025-02-23T10:45:00Z"
+        }
+    ],
+    "captcha_solutions": [
+        {
+            "captcha_id": "abc123",
+            "solution": "4jv8v5",
+            "timestamp": "2025-02-22T16:00:00Z"
+        },
+        {
+            "captcha_id": "xyz456",
+            "solution": "8fh7g1",
+            "timestamp": "2025-02-23T11:00:00Z"
+        }
+    ]
+}
