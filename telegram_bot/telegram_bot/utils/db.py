@@ -1,7 +1,7 @@
 import sqlite3
 from pathlib import Path
 
-DB_PATH = "database.db"  # Путь к базе данных
+DB_PATH = "db.py"  # Путь к базе данных
 
 def get_db_connection():
     """Создает подключение к базе данных SQLite."""

@@ -30,6 +30,8 @@ async def get_account_info(message: Message):
         await message.answer(f"🔐 Текущий аккаунт:\nEmail: {account['email']}\nПароль: {account['password']}")
     else:
         await message.answer("❌ В базе нет зарегистрированных аккаунтов.")
+        
+
 
 async def main():
     await dp.start_polling(bot)
