@@ -5,11 +5,14 @@ from aiogram.filters import Command
 import config
 from handlers import admin, user
 from keyboards import main_menu
+from aiogram.fsm.storage.memory import MemoryStorage
+
 
 logging.basicConfig(level=logging.INFO)
 
 bot = Bot(token=config.TOKEN, parse_mode="HTML")  # В 3.0.0 можно передавать parse_mode напрямую
-dp = Dispatcher()
+storage = MemoryStorage()
+dp = Dispatcher(storage=storage)
 
 # Подключаем обработчики
 dp.include_router(admin.router)

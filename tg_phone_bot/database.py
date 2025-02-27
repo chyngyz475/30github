@@ -1,19 +1,12 @@
-from sqlalchemy import create_engine, Column, Integer, String, Text, JSON, TIMESTAMP
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-import datetime
-import config
+from database import Base
 
-DATABASE_URL = f"postgresql://{config.DB_USER}:{config.DB_PASS}@{config.DB_HOST}/{config.DB_NAME}"
+# URL для подключения к базе данных PostgreSQL
+DATABASE_URL = "postgresql://chyngyz:xsyusp0411@127.0.0.1:5432/phone_korea"
 
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
 
-# Функция для создания сессии
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# Создание таблиц в базе данных
+Base.metadata.create_all(bind=engine)
