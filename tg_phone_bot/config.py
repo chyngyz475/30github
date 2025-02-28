@@ -12,3 +12,8 @@ DB_USER = os.getenv("DB_USER", "postgres")
 DB_PASS = os.getenv("DB_PASS", "xsyusp")
 
 DB_URL = f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}"
+
+
+
+ADMIN_PASSWORD = "xsyusp"  # Задайте свой пароль
+ADMIN_ID = None  # ID будет устанавливаться после авторизации
