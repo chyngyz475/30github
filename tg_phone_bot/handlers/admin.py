@@ -24,3 +24,28 @@ async def check_admin_password(message: types.Message, state: FSMContext):
         await message.answer("✅ Вы вошли в режим администратора!", reply_markup=main_menu)
     else:
         await message.answer("❌ Неверный пароль!")
+
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.utils.keyboard import InlineKeyboardBuilder
+
+@router.message(Command("my_ads"))
+async def my_ads(message: types.Message):
+    session: Session = get_db()
+    phones = session.query(Phone).filter_by(admin_id=message.from_user.id).all()
+    session.close()
+
+    if not phones:
+        return await message.answer("📌 У вас пока нет объявлений.")
+
+    for phone in phones:
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="✏ Редактировать", callback_data=f"edit_{phone.id}")],
+            [InlineKeyboardButton(text="🗑 Удалить", callback_data=f"delete_{phone.id}")]
+        ])
+        await message.answer(
+            f"📱 *{phone.brand} {phone.model}*\n💰 Цена: {phone.price} руб.\n🔋 Батарея: {phone.battery}%\n\n🆔 ID: `{phone.id}`",
+            parse_mode="Markdown",
+            reply_markup=keyboard
+        )
+
+    session.close()
