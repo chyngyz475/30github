@@ -6,11 +6,13 @@ import config
 from handlers import admin, user, add_phone
 from keyboards import main_menu
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.client.default import DefaultBotProperties
+
 
 
 logging.basicConfig(level=logging.INFO)
 
-bot = Bot(token=config.TOKEN, parse_mode="HTML")  # В 3.0.0 можно передавать parse_mode напрямую
+bot = Bot(token=config.TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
 storage = MemoryStorage()
 dp = Dispatcher(storage=storage)
 

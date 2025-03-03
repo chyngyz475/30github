@@ -80,7 +80,7 @@ async def save_photo(bot: Bot, file_id: str) -> str:
     """Скачивает, изменяет размер и сохраняет фото в папку media"""
     file = await bot.download(file_id)
     image = Image.open(file)
-    image = image.resize((800, 800), Image.ANTIALIAS)
+    image = image.resize((800, 800))
 
     # Создаем папку media, если её нет
     os.makedirs("media", exist_ok=True)
