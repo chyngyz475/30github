@@ -10,23 +10,38 @@ driver = webdriver.Chrome()
 driver.get("https://web.whatsapp.com")
 input("Отсканируйте QR-код, затем нажмите Enter...")
 
-# Указываем контакт или группу
-target_name = "+996500600644"
-message = "Привет! Я бот!"
+def send_reply(contact_name, message):
+    """Отправка ответа пользователю."""
+    search_box = driver.find_element(By.XPATH, "//div[@contenteditable='true']")
+    search_box.send_keys(contact_name)
+    search_box.send_keys(Keys.ENTER)
+    time.sleep(2)
 
-# Ищем контакт
-search_box = driver.find_element(By.XPATH, "//div[@contenteditable='true']")
-search_box.send_keys(target_name)
-search_box.send_keys(Keys.ENTER)
-time.sleep(2)
+    message_box = driver.find_element(By.XPATH, "//div[@contenteditable='true']")
+    message_box.send_keys(message)
+    message_box.send_keys(Keys.ENTER)
+    print(f"Ответ отправлен: {message}")
 
-# Отправляем сообщение
-message_box = driver.find_element(By.XPATH, "//div[@contenteditable='true']")
-message_box.send_keys(message)
-message_box.send_keys(Keys.ENTER)
+print("Бот запущен и ожидает сообщения...")
 
-print("Сообщение отправлено!")
-time.sleep(5)
-driver.quit()
+while True:
+    try:
+        # Ищем все входящие непрочитанные сообщения
+        unread_messages = driver.find_elements(By.XPATH, "//span[@class='_2nY6U']")
 
-# Закрываем браузер
+        for message in unread_messages:
+            message.click()
+            time.sleep(2)
+
+            # Получаем имя контакта
+            contact_name = driver.find_element(By.XPATH, "//header//span").text
+            print(f"Новое сообщение от {contact_name}")
+
+            # Отвечаем на сообщение
+            send_reply(contact_name, "Привет! Я бот. Как я могу помочь?")
+
+        time.sleep(5)  # Проверять новые сообщения каждые 5 секунд
+
+    except Exception as e:
+        print(f"Ошибка: {e}")
+        time.sleep(5)
