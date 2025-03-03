@@ -149,3 +149,4 @@ async def save_phone_data(message: types.Message, state: FSMContext):
         await message.answer("✅ Телефон успешно добавлен!")
     finally:
         session.close()  # Закрываем сессию
+

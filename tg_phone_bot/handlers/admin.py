@@ -2,8 +2,11 @@ from aiogram import Router, types
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
+from requests import Session
 import config
 from keyboards import main_menu
+from telegram_phone_bot.database import get_db
+from tg_phone_bot.models import Phone
 
 router = Router()
 
