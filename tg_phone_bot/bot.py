@@ -2,9 +2,10 @@ import asyncio
 import logging
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
+from django.db import router
 import config
 from handlers import admin, user, add_phone
-from keyboards import main_menu
+from keyboards import get_main_menu, main_menu
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.client.default import DefaultBotProperties
 
@@ -21,9 +22,12 @@ dp.include_router(admin.router)
 dp.include_router(user.router)
 dp.include_router(add_phone.router)
 
-@dp.message(Command("start"))
+@router.message(Command("start"))
 async def start(message: types.Message):
-    await message.answer("👋 Привет! Выберите действие:", reply_markup=main_menu)
+    user_id = message.from_user.id
+    keyboard = get_main_menu(user_id)
+    await message.answer("👋 Добро пожаловать! Выберите действие:", reply_markup=keyboard)
+
     
     
 

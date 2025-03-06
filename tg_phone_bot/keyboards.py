@@ -1,20 +1,20 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+import config
 
-# Главное меню
-main_menu = ReplyKeyboardMarkup(
-    keyboard=[
-        [KeyboardButton(text="📋 Список телефонов")],
-        [KeyboardButton(text="➕ Добавить телефон")],
-        [KeyboardButton(text="🔎 Поиск")],
-        [KeyboardButton(text="🔑 Админ")],
-    ],
-    resize_keyboard=True,
-    one_time_keyboard=True
-)
+def get_main_menu(user_id: int):
+    """Генерация клавиатуры в зависимости от роли пользователя."""
+    
+    keyboard = []
 
+    if user_id == config.ADMIN_ID:  # Проверяем, является ли пользователь админом
+        keyboard.append([KeyboardButton(text="📋 Список телефонов")])
+        keyboard.append([KeyboardButton(text="➕ Добавить телефон")])
 
+    keyboard.append([KeyboardButton(text="🔎 Поиск")])
+    keyboard.append([KeyboardButton(text="🔑 Админ")])
 
-
-
-
-
+    return ReplyKeyboardMarkup(
+        keyboard=keyboard,
+        resize_keyboard=True,
+        one_time_keyboard=True
+    )
