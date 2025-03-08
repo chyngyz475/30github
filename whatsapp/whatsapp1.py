@@ -1,14 +1,47 @@
-from flask import Flask, request
-from twilio.twiml.messaging_response import MessagingResponse
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
 
-app = Flask(__name__)
+# Запускаем браузер
+driver = webdriver.Chrome()
 
-@app.route("/whatsapp", methods=["POST"])
-def whatsapp_reply():
-    msg = request.form.get("Body")  # Получаем сообщение пользователя
-    resp = MessagingResponse()
-    resp.message(f"Ты написал: {msg}")  # Ответ на сообщение
-    return str(resp)
+# Открываем WhatsApp Web
+driver.get("https://web.whatsapp.com")
+input("Отсканируйте QR-код, затем нажмите Enter...")
 
-if __name__ == "__main__":
-    app.run(port=5000)
+def send_reply(contact_name, message):
+    """Отправка ответа пользователю."""
+    search_box = driver.find_element(By.XPATH, "//div[@contenteditable='true']")
+    search_box.send_keys(contact_name)
+    search_box.send_keys(Keys.ENTER)
+    time.sleep(2)
+
+    message_box = driver.find_element(By.XPATH, "//div[@contenteditable='true']")
+    message_box.send_keys(message)
+    message_box.send_keys(Keys.ENTER)
+    print(f"Ответ отправлен: {message}")
+
+print("Бот запущен и ожидает сообщения...")
+
+while True:
+    try:
+        # Ищем все входящие непрочитанные сообщения
+        unread_messages = driver.find_elements(By.XPATH, "//span[@class='_2nY6U']")
+
+        for message in unread_messages:
+            message.click()
+            time.sleep(2)
+
+            # Получаем имя контакта
+            contact_name = driver.find_element(By.XPATH, "//header//span").text
+            print(f"Новое сообщение от {contact_name}")
+
+            # Отвечаем на сообщение
+            send_reply(contact_name, "Привет! Я бот. Как я могу помочь?")
+
+        time.sleep(5)  # Проверять новые сообщения каждые 5 секунд
+
+    except Exception as e:
+        print(f"Ошибка: {e}")
+        time.sleep(5)
