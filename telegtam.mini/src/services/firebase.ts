@@ -1,6 +1,7 @@
 // src/services/firebase.ts
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { Ad } from "../types/ad";
+import { db } from "../firebase";
 
 export const fetchAds = async (): Promise<Ad[]> => {
   const adsCollection = collection(db, "ads");

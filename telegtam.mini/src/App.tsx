@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import './App.css';
 import { AdFilters } from "./components/AdFilters";
 import { AdList } from "./components/AdList";
 import { useTelegram } from "./hooks/useTelegram";
 import "./styles/App.css";
-import './App.css';
 
 
 const [filter, setFilter] = useState({ brand: "", condition: "", minPrice: 0, maxPrice: Infinity });
@@ -38,6 +38,6 @@ function App() {
     </div>
   );
 };
-}
+
 
 export default App;
