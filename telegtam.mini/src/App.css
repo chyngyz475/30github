@@ -1,0 +1,67 @@
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filters select, .filters input, .filters button {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.ad-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ad-item {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background-color 0.3s;
+}
+
+.contact-btn {
+  background: #0088cc;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-btn:hover {
+  background: #006bb3;
+}
+
+#backButton {
+  background: #0088cc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#backButton:hover {
+  background: #006bb3;
+}
+
+.no-ads {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
