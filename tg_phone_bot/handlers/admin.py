@@ -3,7 +3,7 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 import config
-from keyboards import main_menu
+from keyboards import get_main_menu
 
 
 router = Router()
@@ -22,7 +22,7 @@ async def check_admin_password(message: types.Message, state: FSMContext):
     if message.text == config.ADMIN_PASSWORD:
         config.ADMIN_ID = message.from_user.id  # Запоминаем ID администратора
         await state.clear()
-        await message.answer("✅ Вы вошли в режим администратора!", reply_markup=main_menu)
+        await message.answer("✅ Вы вошли в режим администратора!", reply_markup=get_main_menu)
     else:
         await message.answer("❌ Неверный пароль!")
 
