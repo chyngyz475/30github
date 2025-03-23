@@ -10,9 +10,8 @@ async def edit_phone(message: types.Message, state: FSMContext):
     args = message.text.split()
     if len(args) < 2:
         return await message.answer("⚠ Укажите ID телефона, который хотите редактировать.\nПример: `/edit 123`", parse_mode="Markdown")
-
     phone_id = args[1]
-    session: Session = get_db()
+    session: Session = get_db()  # Ошибка здесь!
     phone = session.query(Phone).filter_by(id=phone_id, admin_id=message.from_user.id).first()
     
     if not phone:
